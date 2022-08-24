@@ -1,0 +1,32 @@
+services:
+  backend:
+    build:
+      context: .
+      target: development
+    hostname: backend
+    networks:
+      - backend
+    command: npm run start:dev
+    restart: always
+    ports:
+      - "3200:3000"
+    volumes:
+      - ./:/backend
+      - /backend/node_modules
+      - /backend/dist
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7-alpine
+    restart: always
+    networks:
+      - backend
+    volumes:
+      - redis_data:/data
+
+networks:
+  backend:
+
+volumes:
+  redis_data:
