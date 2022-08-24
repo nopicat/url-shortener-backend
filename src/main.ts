@@ -1,10 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { RequestMethod, ValidationPipe } from '@nestjs/common';
+import { RequestMethod } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 
 async function bootstrap() {
-    const app = await NestFactory.create(AppModule);
+    const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
 
     app.setGlobalPrefix('api', {
         exclude: [{ path: '/:shortUrl', method: RequestMethod.ALL }],
@@ -18,7 +19,7 @@ async function bootstrap() {
     const swaggerDocument = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('docs', app, swaggerDocument);
 
-    await app.listen(3000);
+    await app.listen(3000, '0.0.0.0');
 }
 
 bootstrap();

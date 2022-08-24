@@ -2,7 +2,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { All, Controller, NotFoundException, Param, Res } from '@nestjs/common';
 import { StatsService } from '../stats/stats.service';
 import { LinksService } from './links.service';
-import { Response } from 'express';
+import { FastifyReply } from 'fastify';
 
 @ApiTags('Links Redirect')
 @Controller('')
@@ -15,7 +15,7 @@ export class LinksRedirectController {
     @All(':shortUrl')
     public async redirect(
         @Param('shortUrl') shortUrl: string,
-        @Res() res: Response,
+        @Res() res: FastifyReply,
     ) {
         const originalUrl = await this.linksService.getOriginalUrl(
             shortUrl,
