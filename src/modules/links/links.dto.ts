@@ -24,6 +24,9 @@ export class LinkPublicResponseDto {
     @ApiProperty({ description: 'Short URL code', example: 'E5VkRQi' })
     public shortUrl: string;
 
+    @ApiProperty({ description: 'Redirects count', example: 50, type: Number, default: 0 })
+    public redirects: number = 0;
+
     constructor(data: Partial<LinkPublicResponseDto>) {
         Object.assign(this, data);
     }
