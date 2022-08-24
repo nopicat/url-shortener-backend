@@ -20,7 +20,7 @@ export class LinksController {
     public async createLink(@Body() body: CreateLinkInputDto) {
         const shortUrl = await this.linksService.generateUniqueLink();
 
-        await this.linksService.setOriginalUrlByShortUrl(shortUrl, body.url);
+        await this.linksService.setOriginalUrl(shortUrl, body.url);
 
         return new LinkPublicResponseDto({
             originalUrl: body.url,

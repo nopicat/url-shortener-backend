@@ -19,7 +19,7 @@ export class StatsController {
     })
     @Get(':shortUrl')
     public async getStats(@Param('shortUrl') shortUrl: string) {
-        const originalUrl = await this.linksService.getOriginalUrlByShortUrl(
+        const originalUrl = await this.linksService.getOriginalUrl(
             shortUrl,
         );
 

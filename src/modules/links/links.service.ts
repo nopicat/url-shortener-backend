@@ -26,7 +26,7 @@ export class LinksService {
     public async generateUniqueLink(): Promise<string> {
         const generatedLink = this.generateRandomLink();
 
-        const linkInDatabase = await this.getOriginalUrlByShortUrl(
+        const linkInDatabase = await this.getOriginalUrl(
             generatedLink,
         );
 
@@ -35,11 +35,11 @@ export class LinksService {
             : await this.generateUniqueLink();
     }
 
-    public getOriginalUrlByShortUrl(shortUrl: string) {
+    public getOriginalUrl(shortUrl: string) {
         return this.redis.get(`URL:${shortUrl}`);
     }
 
-    public setOriginalUrlByShortUrl(shortUrl: string, originalUrl: string) {
+    public setOriginalUrl(shortUrl: string, originalUrl: string) {
         return this.redis.set(`URL:${shortUrl}`, originalUrl);
     }
 }

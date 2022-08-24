@@ -17,7 +17,7 @@ export class LinksRedirectController {
         @Param('shortUrl') shortUrl: string,
         @Res() res: Response,
     ) {
-        const originalUrl = await this.linksService.getOriginalUrlByShortUrl(
+        const originalUrl = await this.linksService.getOriginalUrl(
             shortUrl,
         );
 
