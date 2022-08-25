@@ -27,6 +27,6 @@ export class LinksRedirectController {
 
         await this.statsService.incrementRedirects(shortUrl);
 
-        res.redirect(originalUrl);
+        res.code(302).redirect(originalUrl);
     }
 }
