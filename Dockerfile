@@ -4,6 +4,7 @@ WORKDIR /backend
 
 COPY package*.json .
 
+RUN apt-get update
 RUN apt-get -y install procps
 
 RUN npm ci
