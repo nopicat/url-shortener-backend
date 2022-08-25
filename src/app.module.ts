@@ -17,7 +17,9 @@ import { RedisModule } from '@svtslv/nestjs-ioredis';
     providers: [
         {
             provide: APP_PIPE,
-            useClass: ValidationPipe,
+            useValue: new ValidationPipe({
+                transform: true,
+            }),
         },
     ],
 })
